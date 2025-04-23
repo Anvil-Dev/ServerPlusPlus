@@ -14,6 +14,7 @@ public class ServerPlusPlusServerRules {
             return Map.entry(0, 32);
         }
     }
+
     // 服务器视距
     @Rule(
         allowed = {"0", "12", "16", "32"},
@@ -23,6 +24,7 @@ public class ServerPlusPlusServerRules {
         },
         validator = ViewDistanceValidator.class
     )
+    @SuppressWarnings("unused")
     public static int viewDistance = 0;
     // 服务器模拟距离
     @Rule(
@@ -33,6 +35,7 @@ public class ServerPlusPlusServerRules {
         },
         validator = ViewDistanceValidator.class
     )
+    @SuppressWarnings("unused")
     public static int simulationDistance = 0;
     // 快速发送坐标
     @Rule(

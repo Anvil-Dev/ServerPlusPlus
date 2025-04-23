@@ -7,6 +7,33 @@
   "survival_plus_plus.rolling_gate.rule.simulation_distance": "模拟距离",
   "survival_plus_plus.rolling_gate.rule.simulation_distance.desc": "设置服务器的模拟距离",
 
+  "survival_plus_plus.rolling_gate.rule.command_here": "/here 命令",
+  "survival_plus_plus.rolling_gate.rule.command_here.desc": "快速发送位置",
+
+  "survival_plus_plus.rolling_gate.rule.command_whereis": "/whereis 命令",
+  "survival_plus_plus.rolling_gate.rule.command_whereis.desc": "Quickly locate players",
+
+  "survival_plus_plus.rolling_gate.rule.command_todo": "/todo 命令",
+  "survival_plus_plus.rolling_gate.rule.command_todo.desc": "一个 ToDo 管理菜单",
+
+  "survival_plus_plus.rolling_gate.rule.command_loc": "/loc 命令",
+  "survival_plus_plus.rolling_gate.rule.command_loc.desc": "一个地标管理菜单",
+
+  "survival_plus_plus.rolling_gate.rule.command_wlist": "/wlist 命令",
+  "survival_plus_plus.rolling_gate.rule.command_wlist.desc": "白名单管理",
+
+  "survival_plus_plus.rolling_gate.rule.command_blist": "/blist 命令",
+  "survival_plus_plus.rolling_gate.rule.command_blist.desc": "封禁名单管理",
+
+  "survival_plus_plus.rolling_gate.rule.command_sop": "/sop 命令",
+  "survival_plus_plus.rolling_gate.rule.command_sop.desc": "简单的获取op",
+
+  "survival_plus_plus.rolling_gate.rule.command_transfer": "/transfer 命令",
+  "survival_plus_plus.rolling_gate.rule.command_transfer.desc": "允许玩家使用 /transfer 命令转移自己",
+
+  "survival_plus_plus.rolling_gate.rule.fast_ping_friend": "快速 Ping 好友",
+  "survival_plus_plus.rolling_gate.rule.fast_ping_friend.desc": "快速 Ping 好友",
+
   "server_plus_plus.rolling_gate.rule.welcome_player": "欢迎玩家",
   "server_plus_plus.rolling_gate.rule.welcome_player.desc": "当玩家登录到服务器时发送欢迎信息"
 }

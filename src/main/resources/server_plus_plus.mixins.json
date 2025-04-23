@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "server_plus_plus.refmap.json",
   "mixins": [
+    "TransferCommandMixin"
   ],
   "client": [
   ],

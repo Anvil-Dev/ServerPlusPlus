@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 @Mod(ServerPlusPlus.MOD_ID)
 public class ServerPlusPlus implements RGAdditional {
     public static final String MOD_ID = "server_plus_plus";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public ServerPlusPlus(@SuppressWarnings("unused") IEventBus modEventBus, @NotNull ModContainer modContainer) {
         modContainer.registerExtensionPoint(RGAdditional.class, this);
