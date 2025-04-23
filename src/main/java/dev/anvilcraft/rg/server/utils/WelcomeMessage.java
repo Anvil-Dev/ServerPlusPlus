@@ -1,7 +1,5 @@
 package dev.anvilcraft.rg.server.utils;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -38,17 +36,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WelcomeMessage {
-    public static final Gson GSON = new GsonBuilder()
-        .setPrettyPrinting()
-        .registerTypeHierarchyAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
-        .registerTypeHierarchyAdapter(ChatFormatting.class, new ChatFormattingSerializer())
-        .registerTypeHierarchyAdapter(WelcomeMessage.MessageData.class, new WelcomeMessage.MessageData.Serializer())
-        .create();
     public static final String ARGS_REGEX = "\\{%\\w+%}";
     public static final FilesUtil.ObjFile<MessageConfig> WELCOME_MESSAGE = new FilesUtil.ObjFile<>("welcome", new MessageConfig());
 
     static {
-        WELCOME_MESSAGE.setGson(WelcomeMessage.GSON);
+        WELCOME_MESSAGE.setGson(
+            builder -> builder
+                .registerTypeHierarchyAdapter(MessageData.class, new MessageData.Serializer())
+        );
     }
 
     public static void onPlayerLoggedIn(@NotNull ServerPlayer player) {

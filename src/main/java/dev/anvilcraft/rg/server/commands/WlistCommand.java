@@ -140,7 +140,7 @@ public class WlistCommand {
         Collection<GameProfile> targets = GameProfileArgument.getGameProfiles(context, "targets");
         for (GameProfile target : targets) {
             PERMISSION.map.put(target.getId().toString(), true);
-            context.getSource().sendSuccess(()->Component.literal("Player %s has been granted permission to operate the whitelist.".formatted(target.getName())),true);
+            context.getSource().sendSuccess(() -> Component.literal("Player %s has been granted permission to operate the whitelist.".formatted(target.getName())), true);
             ++i;
         }
         ModCommands.notifyPlayersCommandsChanged(context.getSource().getServer());
@@ -154,7 +154,7 @@ public class WlistCommand {
         Collection<GameProfile> targets = GameProfileArgument.getGameProfiles(context, "targets");
         for (GameProfile target : targets) {
             PERMISSION.map.put(target.getId().toString(), false);
-            context.getSource().sendSuccess(()->Component.literal("Revoked player %s's permission to operate the whitelist".formatted(target.getName())),true);
+            context.getSource().sendSuccess(() -> Component.literal("Revoked player %s's permission to operate the whitelist".formatted(target.getName())), true);
             ++i;
         }
         ModCommands.notifyPlayersCommandsChanged(context.getSource().getServer());
