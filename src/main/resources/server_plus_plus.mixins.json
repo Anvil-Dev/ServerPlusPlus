@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "dev.anvilcraft.rg.spp.mixin",
+  "package": "dev.anvilcraft.rg.server.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "server_plus_plus.refmap.json",
   "mixins": [

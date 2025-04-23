@@ -1,6 +1,12 @@
 {
   "rolling_gate.category.server_plus_plus": "服务器++",
 
+  "survival_plus_plus.rolling_gate.rule.view_distance": "视距",
+  "survival_plus_plus.rolling_gate.rule.view_distance.desc": "设置服务器的默认视距",
+
+  "survival_plus_plus.rolling_gate.rule.simulation_distance": "模拟距离",
+  "survival_plus_plus.rolling_gate.rule.simulation_distance.desc": "设置服务器的模拟距离",
+
   "server_plus_plus.rolling_gate.rule.welcome_player": "欢迎玩家",
   "server_plus_plus.rolling_gate.rule.welcome_player.desc": "当玩家登录到服务器时发送欢迎信息"
 }

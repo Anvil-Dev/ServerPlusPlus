@@ -1,4 +1,4 @@
-package dev.anvilcraft.rg.spp.utils;
+package dev.anvilcraft.rg.server.utils;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

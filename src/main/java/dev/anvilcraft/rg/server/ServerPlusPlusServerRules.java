@@ -1,10 +1,39 @@
-package dev.anvilcraft.rg.spp;
+package dev.anvilcraft.rg.server;
 
 import dev.anvilcraft.rg.RollingGateCategories;
 import dev.anvilcraft.rg.api.RGValidator;
 import dev.anvilcraft.rg.api.Rule;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
 
 public class ServerPlusPlusServerRules {
+    public static class ViewDistanceValidator extends RGValidator.IntegerValidator {
+        @Override
+        public @NotNull Map.Entry<Integer, Integer> getRange() {
+            return Map.entry(0, 32);
+        }
+    }
+    // 服务器视距
+    @Rule(
+        allowed = {"0", "12", "16", "32"},
+        categories = {
+            ServerPlusPlus.MOD_ID,
+            RollingGateCategories.CREATIVE
+        },
+        validator = ViewDistanceValidator.class
+    )
+    public static int viewDistance = 0;
+    // 服务器模拟距离
+    @Rule(
+        allowed = {"0", "12", "16", "32"},
+        categories = {
+            ServerPlusPlus.MOD_ID,
+            RollingGateCategories.CREATIVE
+        },
+        validator = ViewDistanceValidator.class
+    )
+    public static int simulationDistance = 0;
     // 快速发送坐标
     @Rule(
         allowed = {"ops", "true", "false", "1", "2", "3", "4"},

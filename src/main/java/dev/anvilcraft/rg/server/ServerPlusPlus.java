@@ -1,11 +1,10 @@
-package dev.anvilcraft.rg.spp;
+package dev.anvilcraft.rg.server;
 
 import com.mojang.logging.LogUtils;
-import dev.anvilcraft.rg.RollingGateServerRules;
 import dev.anvilcraft.rg.api.RGAdditional;
 import dev.anvilcraft.rg.api.server.ServerRGRuleManager;
 import dev.anvilcraft.rg.api.server.TranslationUtil;
-import dev.anvilcraft.rg.spp.utils.WelcomeMessage;
+import dev.anvilcraft.rg.server.utils.WelcomeMessage;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;

@@ -1,6 +1,12 @@
 {
   "rolling_gate.category.server_plus_plus": "SERVER++",
 
+  "survival_plus_plus.rolling_gate.rule.view_distance": "View Distance",
+  "survival_plus_plus.rolling_gate.rule.view_distance.desc": "Set the default view distance for server",
+
+  "survival_plus_plus.rolling_gate.rule.simulation_distance": "Simulation Distance",
+  "survival_plus_plus.rolling_gate.rule.simulation_distance.desc": "Set the default simulation distance for server",
+
   "server_plus_plus.rolling_gate.rule.welcome_player": "Welcome Player",
   "server_plus_plus.rolling_gate.rule.welcome_player.desc": "Send welcome message when player logs in to server"
 }
