@@ -9,6 +9,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import dev.anvilcraft.rg.api.RGValidator;
+import dev.anvilcraft.rg.api.server.TranslationUtil;
 import dev.anvilcraft.rg.server.ServerPlusPlusServerRules;
 import dev.anvilcraft.rg.tools.FilesUtil;
 import dev.anvilcraft.rg.tools.IdGenerator;
@@ -90,7 +91,7 @@ public class LocCommand {
         ResourceKey<Level> dim = source.getLevel().dimension();
         LOC_POINT.map.put(id, new LocPoint(id, desc, pos.x, pos.y, pos.z, dim));
         LOC_POINT.save();
-        source.sendSuccess(() -> Component.literal("Loc %s is added.".formatted(desc)), false);
+        source.sendSuccess(() -> TranslationUtil.trans("command_loc.message.added", desc), false);
         return 1;
     }
 
@@ -99,11 +100,11 @@ public class LocCommand {
         Long id = LongArgumentType.getLong(context, "id");
         LocPoint remove = LOC_POINT.map.remove(id);
         if (remove == null) {
-            context.getSource().sendFailure(Component.literal("No such loc id %s".formatted(id)));
+            context.getSource().sendFailure(TranslationUtil.trans("command_loc.message.no_such_id", id));
             return 0;
         }
         LOC_POINT.save();
-        context.getSource().sendSuccess(() -> Component.literal("Loc %s is removed.".formatted(remove.desc)), false);
+        context.getSource().sendSuccess(() -> TranslationUtil.trans("command_loc.message.removed", remove.desc), false);
         return 1;
     }
 
@@ -119,12 +120,12 @@ public class LocCommand {
         int size = LOC_POINT.map.size();
         int maxPage = size / pageSize + 1;
         if (page > maxPage) {
-            context.getSource().sendFailure(Component.literal("No such page %s".formatted(page)));
+            context.getSource().sendFailure(TranslationUtil.trans("command_loc.message.no_such_page", page));
             return 0;
         }
         LocPoint[] locPoints = LOC_POINT.map.values().toArray(new LocPoint[0]);
         context.getSource().sendSystemMessage(
-            Component.literal("======= Loc List (Page %s/%s) =======".formatted(page, maxPage))
+            TranslationUtil.trans("command_loc.message.page_title", page, maxPage)
                 .withStyle(ChatFormatting.YELLOW)
         );
         for (int i = (page - 1) * pageSize; i < size && i < page * pageSize; i++) {
@@ -150,7 +151,7 @@ public class LocCommand {
                 .append(" ")
                 .append(prevPage)
                 .append(" ")
-                .append(Component.literal("(Loc %s/%s)".formatted(page, maxPage)).withStyle(ChatFormatting.YELLOW))
+                .append(TranslationUtil.trans("command_loc.message.page_footer", page, maxPage).withStyle(ChatFormatting.YELLOW))
                 .append(" ")
                 .append(nextPage)
                 .append(" ")
@@ -169,13 +170,13 @@ public class LocCommand {
         MutableComponent info = Component.literal("[i]").withStyle(
             Style.EMPTY
                 .applyFormat(ChatFormatting.YELLOW)
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("View loc point information")))
+                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TranslationUtil.trans("command_loc.message.info")))
                 .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/loc info %s".formatted(locPoint.id)))
         );
         MutableComponent remove = Component.literal("[\uD83D\uDDD1]").withStyle(
             Style.EMPTY
                 .applyFormat(ChatFormatting.RED)
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("Remove loc point")))
+                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TranslationUtil.trans("command_loc.message.remove")))
                 .withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/loc remove %s".formatted(locPoint.id)))
         );
         return Component.literal("▶ ").append(component)
@@ -189,7 +190,7 @@ public class LocCommand {
         Long id = LongArgumentType.getLong(context, "id");
         LocPoint point = LOC_POINT.map.getOrDefault(id, null);
         if (point == null) {
-            context.getSource().sendFailure(Component.literal("No such loc id %s".formatted(id)));
+            context.getSource().sendFailure(TranslationUtil.trans("command_loc.message.no_such_id", id));
             return 0;
         }
         for (Component component : LocCommand.info(point)) {
@@ -213,11 +214,13 @@ public class LocCommand {
         List<MutableComponent> pos = PosUtils.pos(point.desc, point.x, point.y, point.z, point.dimType);
         List<Component> result = new ArrayList<>();
         result.add(Component.literal("==================").withStyle(ChatFormatting.YELLOW));
-        result.add(Component.literal("Loc Point: ").append(desc));
-        result.add(Component.literal("Dimension: ").append(dimType));
-        if (!pos.isEmpty()) result.add(Component.literal("Position: ").append(pos.get(0)));
+        result.add(TranslationUtil.trans("command_loc.message.loc_point").append(desc));
+        result.add(TranslationUtil.trans("command_loc.message.dimension").append(dimType));
+        if (!pos.isEmpty()) result.add(TranslationUtil.trans("command_loc.message.position").append(pos.get(0)));
         if (pos.size() > 1) result.add(pos.get(1));
-        if (pos.size() > 2) result.add(Component.literal("Transform Position: ").append(pos.get(2)));
+        if (pos.size() > 2) {
+            result.add(TranslationUtil.trans("command_loc.message.transform_position").append(pos.get(2)));
+        }
         if (pos.size() > 3) result.add(pos.get(3));
         result.add(Component.literal("==================").withStyle(ChatFormatting.YELLOW));
         return result;

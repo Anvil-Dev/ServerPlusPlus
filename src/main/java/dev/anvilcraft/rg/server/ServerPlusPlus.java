@@ -26,8 +26,8 @@ public class ServerPlusPlus implements RGAdditional {
     }
 
     @SubscribeEvent
-    public void onPlayerLoggingIn(@NotNull PlayerEvent.PlayerLoggedInEvent event){
-        if(ServerPlusPlusServerRules.welcomePlayer){
+    public void onPlayerLoggingIn(@NotNull PlayerEvent.PlayerLoggedInEvent event) {
+        if (ServerPlusPlusServerRules.welcomePlayer) {
             WelcomeMessage.onPlayerLoggedIn((ServerPlayer) event.getEntity());
         }
     }

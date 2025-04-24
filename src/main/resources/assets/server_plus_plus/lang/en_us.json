@@ -11,7 +11,7 @@
   "survival_plus_plus.rolling_gate.rule.command_here.desc": "Quickly send position",
 
   "survival_plus_plus.rolling_gate.rule.command_whereis": "/whereis Command",
-  "survival_plus_plus.rolling_gate.rule.command_whereis.desc": "Quickly locate players",
+  "survival_plus_plus.rolling_gate.rule.command_whereis.desc": "Quickly locate player",
 
   "survival_plus_plus.rolling_gate.rule.command_todo": "/todo Command",
   "survival_plus_plus.rolling_gate.rule.command_todo.desc": "A ToDo Management Menu",
@@ -32,8 +32,40 @@
   "survival_plus_plus.rolling_gate.rule.command_transfer.desc": "Allows players to transfer themselves using the /transfer command",
 
   "survival_plus_plus.rolling_gate.rule.fast_ping_friend": "Fast Ping Friend",
-  "survival_plus_plus.rolling_gate.rule.fast_ping_friend.desc": "Fast ping friend",
+  "survival_plus_plus.rolling_gate.rule.fast_ping_friend.desc": "Fast ping your friend",
 
   "server_plus_plus.rolling_gate.rule.welcome_player": "Welcome Player",
-  "server_plus_plus.rolling_gate.rule.welcome_player.desc": "Send welcome message when player logs in to server"
+  "server_plus_plus.rolling_gate.rule.welcome_player.desc": "Send welcome message when player login to server",
+
+  "command_todo.message.added": "Todo %s is added.",
+  "command_todo.message.no_such_id": "No such todo id %s.",
+  "command_todo.message.removed": "Todo %s is removed.",
+  "command_todo.message.success": "Todo %s has be %s.",
+  "command_todo.message.no_such_page": "No such page %s.",
+  "command_todo.message.page_title": "======= Todo List (Page %s/%s) =======",
+  "command_todo.message.page_footer": "(Todo %s/%s)",
+  "command_todo.message.done": "done",
+  "command_todo.message.undone": "undone",
+  "command_todo.message.make_done": "Make todo done",
+  "command_todo.message.make_undone": "Make todo undone",
+  "command_todo.message.remove": "Remove todo",
+
+  "command_loc.message.added": "Loc %s is added.",
+  "command_loc.message.no_such_id": "No such loc id %s.",
+  "command_loc.message.removed": "Loc %s is removed.",
+  "command_loc.message.no_such_page": "No such page %s.",
+  "command_loc.message.page_title": "======= Loc List (Page %s/%s) =======",
+  "command_loc.message.page_footer": "(Loc %s/%s)",
+  "command_loc.message.info": "View loc point information",
+  "command_loc.message.remove": "Remove loc point",
+  "command_loc.message.loc_point": "Loc Point: ",
+  "command_loc.message.dimension": "Dimension: ",
+  "command_loc.message.position": "Position: ",
+  "command_loc.message.transform_position": "Transform Position: ",
+
+  "command_wlist.message.granted_permission": "Player %s has been granted permission to operate the whitelist.",
+  "command_wlist.message.revoked_permission": "Revoked player %s's permission to operate the whitelist.",
+
+  "command_blist.message.granted_permission": "Player %s has been granted permission to operate the banned list.",
+  "command_blist.message.revoked_permission": "Revoked player %s's permission to operate the banned list."
 }

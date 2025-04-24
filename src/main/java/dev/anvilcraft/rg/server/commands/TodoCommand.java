@@ -9,6 +9,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import dev.anvilcraft.rg.api.RGValidator;
+import dev.anvilcraft.rg.api.server.TranslationUtil;
 import dev.anvilcraft.rg.server.ServerPlusPlusServerRules;
 import dev.anvilcraft.rg.tools.FilesUtil;
 import dev.anvilcraft.rg.tools.IdGenerator;
@@ -87,7 +88,7 @@ public class TodoCommand {
         String desc = StringArgumentType.getString(context, "desc");
         TODO.map.put(id, new Todo(id, desc, false));
         TODO.save();
-        source.sendSuccess(() -> Component.literal("Todo %s is added.".formatted(desc)), false);
+        source.sendSuccess(() -> TranslationUtil.trans("command_todo.message.added", desc), false);
         return 1;
     }
 
@@ -96,11 +97,11 @@ public class TodoCommand {
         Long id = LongArgumentType.getLong(context, "id");
         Todo todo = TODO.map.remove(id);
         if (todo == null) {
-            context.getSource().sendFailure(Component.literal("No such todo id %s".formatted(id)));
+            context.getSource().sendFailure(TranslationUtil.trans("command_todo.message.no_such_id", id));
             return 0;
         }
         TODO.save();
-        context.getSource().sendSuccess(() -> Component.literal("Todo %s is removed.".formatted(todo.desc)), false);
+        context.getSource().sendSuccess(() -> TranslationUtil.trans("command_todo.message.removed", todo.desc), false);
         return 1;
     }
 
@@ -115,13 +116,17 @@ public class TodoCommand {
         }
         Todo todo = TODO.map.get(id);
         if (todo == null) {
-            context.getSource().sendFailure(Component.literal("No such todo id %s".formatted(id)));
+            context.getSource().sendFailure(TranslationUtil.trans("command_todo.message.no_such_id", id));
             return 0;
         }
         todo.success = success;
         TODO.save();
         boolean finalSuccess = success;
-        context.getSource().sendSuccess(() -> Component.literal("Todo %s has be %s.".formatted(todo.desc, finalSuccess ? "done" : "undone")), false);
+        context.getSource().sendSuccess(() -> TranslationUtil.trans(
+            "command_todo.message.success",
+            todo.desc,
+            finalSuccess ? TranslationUtil.trans("command_todo.message.done") : TranslationUtil.trans("command_todo.message.undone")
+        ), false);
         return 1;
     }
 
@@ -137,12 +142,12 @@ public class TodoCommand {
         int size = TODO.map.size();
         int maxPage = size / pageSize + 1;
         if (page > maxPage) {
-            context.getSource().sendFailure(Component.literal("No such page %s".formatted(page)));
+            context.getSource().sendFailure(TranslationUtil.trans("command_todo.message.no_such_page", page));
             return 0;
         }
         Todo[] todos = TODO.map.values().toArray(new Todo[0]);
         context.getSource().sendSystemMessage(
-            Component.literal("======= Todo List (Page %s/%s) =======".formatted(page, maxPage))
+            TranslationUtil.trans("command_todo.message.page_title", page, maxPage)
                 .withStyle(ChatFormatting.YELLOW)
         );
         for (int i = (page - 1) * pageSize; i < size && i < page * pageSize; i++) {
@@ -168,7 +173,7 @@ public class TodoCommand {
                 .append(" ")
                 .append(prevPage)
                 .append(" ")
-                .append(Component.literal("(Todo %s/%s)".formatted(page, maxPage)).withStyle(ChatFormatting.YELLOW))
+                .append(TranslationUtil.trans("command_todo.message.page_footer", page, maxPage).withStyle(ChatFormatting.YELLOW))
                 .append(" ")
                 .append(nextPage)
                 .append(" ")
@@ -177,7 +182,7 @@ public class TodoCommand {
         return 1;
     }
 
-    private static @NotNull MutableComponent TodoToComponent(Todo todo) {
+    private static @NotNull MutableComponent TodoToComponent(@NotNull Todo todo) {
         MutableComponent component = Component.literal(todo.desc).withStyle(
             Style.EMPTY
                 .withStrikethrough(todo.success)
@@ -187,19 +192,19 @@ public class TodoCommand {
         MutableComponent success = Component.literal("[✔]").withStyle(
             Style.EMPTY
                 .applyFormat(ChatFormatting.GREEN)
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("Make todo done")))
+                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TranslationUtil.trans("command_todo.message.make_done")))
                 .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/todo success %s".formatted(todo.id)))
         );
         MutableComponent unSuccess = Component.literal("[❌]").withStyle(
             Style.EMPTY
                 .applyFormat(ChatFormatting.RED)
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("Make todo undone")))
+                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TranslationUtil.trans("command_todo.message.make_undone")))
                 .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/todo success %s false".formatted(todo.id)))
         );
         MutableComponent remove = Component.literal("[\uD83D\uDDD1]").withStyle(
             Style.EMPTY
                 .applyFormat(ChatFormatting.RED)
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("Remove todo")))
+                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TranslationUtil.trans("command_todo.message.remove")))
                 .withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/todo remove %s".formatted(todo.id)))
         );
         return Component.literal(todo.success ? "☑" : "☐")

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(TransferCommand.class)
-public class TransferCommandMixin {
+abstract class TransferCommandMixin {
     @WrapOperation(method = "lambda$register$0", at = @At(value = "INVOKE", target = "Lnet/minecraft/commands/CommandSourceStack;hasPermission(I)Z"))
     private static boolean registerPermission(CommandSourceStack instance, int i, Operation<Boolean> original) {
         return ServerPlusPlusServerRules.commandTransfer || original.call(instance, i);

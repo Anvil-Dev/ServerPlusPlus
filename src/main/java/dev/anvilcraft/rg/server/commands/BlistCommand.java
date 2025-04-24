@@ -7,6 +7,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import dev.anvilcraft.rg.api.RGValidator;
+import dev.anvilcraft.rg.api.server.TranslationUtil;
 import dev.anvilcraft.rg.server.ServerPlusPlusServerRules;
 import dev.anvilcraft.rg.tools.FilesUtil;
 import dev.anvilcraft.rg.tools.ModCommands;
@@ -140,7 +141,7 @@ public class BlistCommand {
         Collection<GameProfile> targets = GameProfileArgument.getGameProfiles(context, "targets");
         for (GameProfile target : targets) {
             PERMISSION.map.put(target.getId().toString(), true);
-            context.getSource().sendSuccess(() -> Component.literal("Player %s has been granted permission to operate the banned list.".formatted(target.getName())), true);
+            context.getSource().sendSuccess(() -> TranslationUtil.trans("command_blist.message.granted_permission", target.getName()), true);
             ++i;
         }
         ModCommands.notifyPlayersCommandsChanged(context.getSource().getServer());
@@ -154,7 +155,7 @@ public class BlistCommand {
         Collection<GameProfile> targets = GameProfileArgument.getGameProfiles(context, "targets");
         for (GameProfile target : targets) {
             PERMISSION.map.put(target.getId().toString(), false);
-            context.getSource().sendSuccess(() -> Component.literal("Revoked player %s's permission to operate the banned list".formatted(target.getName())), true);
+            context.getSource().sendSuccess(() -> TranslationUtil.trans("command_blist.message.revoked_permission", target.getName()), true);
             ++i;
         }
         ModCommands.notifyPlayersCommandsChanged(context.getSource().getServer());

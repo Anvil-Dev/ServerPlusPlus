@@ -11,10 +11,10 @@
   "survival_plus_plus.rolling_gate.rule.command_here.desc": "快速发送位置",
 
   "survival_plus_plus.rolling_gate.rule.command_whereis": "/whereis 命令",
-  "survival_plus_plus.rolling_gate.rule.command_whereis.desc": "Quickly locate players",
+  "survival_plus_plus.rolling_gate.rule.command_whereis.desc": "快速定位玩家",
 
   "survival_plus_plus.rolling_gate.rule.command_todo": "/todo 命令",
-  "survival_plus_plus.rolling_gate.rule.command_todo.desc": "一个 ToDo 管理菜单",
+  "survival_plus_plus.rolling_gate.rule.command_todo.desc": "一个待办事项管理菜单",
 
   "survival_plus_plus.rolling_gate.rule.command_loc": "/loc 命令",
   "survival_plus_plus.rolling_gate.rule.command_loc.desc": "一个地标管理菜单",
@@ -26,7 +26,7 @@
   "survival_plus_plus.rolling_gate.rule.command_blist.desc": "封禁名单管理",
 
   "survival_plus_plus.rolling_gate.rule.command_sop": "/sop 命令",
-  "survival_plus_plus.rolling_gate.rule.command_sop.desc": "简单的获取op",
+  "survival_plus_plus.rolling_gate.rule.command_sop.desc": "简单的获取op权限",
 
   "survival_plus_plus.rolling_gate.rule.command_transfer": "/transfer 命令",
   "survival_plus_plus.rolling_gate.rule.command_transfer.desc": "允许玩家使用 /transfer 命令转移自己",
@@ -35,5 +35,37 @@
   "survival_plus_plus.rolling_gate.rule.fast_ping_friend.desc": "快速 Ping 好友",
 
   "server_plus_plus.rolling_gate.rule.welcome_player": "欢迎玩家",
-  "server_plus_plus.rolling_gate.rule.welcome_player.desc": "当玩家登录到服务器时发送欢迎信息"
+  "server_plus_plus.rolling_gate.rule.welcome_player.desc": "当玩家登录到服务器时发送欢迎信息",
+
+  "command_todo.message.added": "待办事项 %s 已添加。",
+  "command_todo.message.no_such_id": "没有找到待办事项 id %s。",
+  "command_todo.message.removed": "待办事项 %s 已删除。",
+  "command_todo.message.success": "待办事项 %s %s。",
+  "command_todo.message.no_such_page": "没有找到页面 %s。",
+  "command_todo.message.page_title": "======= 待办事项列表 (%s/%s) =======",
+  "command_todo.message.page_footer": "(待办事项 %s/%s)",
+  "command_todo.message.done": "已完成",
+  "command_todo.message.undone": "未完成",
+  "command_todo.message.make_done": "完成待办事项",
+  "command_todo.message.make_undone": "未完成完成",
+  "command_todo.message.remove": "删除待办事项",
+
+  "command_loc.message.added": "地标 %s 已添加。",
+  "command_loc.message.no_such_id": "没有找到地标 id %s。",
+  "command_loc.message.removed": "地标 %s 已删除。",
+  "command_loc.message.no_such_page": "没有找到页面 %s。",
+  "command_loc.message.page_title": "======= 地标列表 (%s/%s) =======",
+  "command_loc.message.page_footer": "(地标 %s/%s)",
+  "command_loc.message.info": "查看地标点信息",
+  "command_loc.message.remove": "删除地标点",
+  "command_loc.message.loc_point": "地标点：",
+  "command_loc.message.dimension": "维度：",
+  "command_loc.message.position": "位置：",
+  "command_loc.message.transform_position": "变换位置：",
+
+  "command_wlist.message.granted_permission": "玩家 %s 已被授予操作白名单的权限。",
+  "command_wlist.message.revoked_permission": "撤销了玩家 %s 对白名单的操作权限。",
+
+  "command_blist.message.granted_permission": "玩家 %s 已被授予操作封禁列表的权限。",
+  "command_blist.message.revoked_permission": "撤销了玩家 %s 对封禁列表的操作权限。"
 }
