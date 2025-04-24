@@ -1,38 +1,38 @@
 {
   "rolling_gate.category.server_plus_plus": "SERVER++",
 
-  "survival_plus_plus.rolling_gate.rule.view_distance": "View Distance",
-  "survival_plus_plus.rolling_gate.rule.view_distance.desc": "Set the default view distance for server",
+  "server_plus_plus.rolling_gate.rule.view_distance": "View Distance",
+  "server_plus_plus.rolling_gate.rule.view_distance.desc": "Set the default view distance for server",
 
-  "survival_plus_plus.rolling_gate.rule.simulation_distance": "Simulation Distance",
-  "survival_plus_plus.rolling_gate.rule.simulation_distance.desc": "Set the default simulation distance for server",
+  "server_plus_plus.rolling_gate.rule.simulation_distance": "Simulation Distance",
+  "server_plus_plus.rolling_gate.rule.simulation_distance.desc": "Set the default simulation distance for server",
 
-  "survival_plus_plus.rolling_gate.rule.command_here": "/here Command",
-  "survival_plus_plus.rolling_gate.rule.command_here.desc": "Quickly send position",
+  "server_plus_plus.rolling_gate.rule.command_here": "/here Command",
+  "server_plus_plus.rolling_gate.rule.command_here.desc": "Quickly send position",
 
-  "survival_plus_plus.rolling_gate.rule.command_whereis": "/whereis Command",
-  "survival_plus_plus.rolling_gate.rule.command_whereis.desc": "Quickly locate player",
+  "server_plus_plus.rolling_gate.rule.command_whereis": "/whereis Command",
+  "server_plus_plus.rolling_gate.rule.command_whereis.desc": "Quickly locate player",
 
-  "survival_plus_plus.rolling_gate.rule.command_todo": "/todo Command",
-  "survival_plus_plus.rolling_gate.rule.command_todo.desc": "A ToDo Management Menu",
+  "server_plus_plus.rolling_gate.rule.command_todo": "/todo Command",
+  "server_plus_plus.rolling_gate.rule.command_todo.desc": "A ToDo Management Menu",
 
-  "survival_plus_plus.rolling_gate.rule.command_loc": "/loc Command",
-  "survival_plus_plus.rolling_gate.rule.command_loc.desc": "A Loc Management Menu",
+  "server_plus_plus.rolling_gate.rule.command_loc": "/loc Command",
+  "server_plus_plus.rolling_gate.rule.command_loc.desc": "A Loc Management Menu",
 
-  "survival_plus_plus.rolling_gate.rule.command_wlist": "/wlist Command",
-  "survival_plus_plus.rolling_gate.rule.command_wlist.desc": "Whitelist Management",
+  "server_plus_plus.rolling_gate.rule.command_wlist": "/wlist Command",
+  "server_plus_plus.rolling_gate.rule.command_wlist.desc": "Whitelist Management",
 
-  "survival_plus_plus.rolling_gate.rule.command_blist": "/blist Command",
-  "survival_plus_plus.rolling_gate.rule.command_blist.desc": "Banned List Management",
+  "server_plus_plus.rolling_gate.rule.command_blist": "/blist Command",
+  "server_plus_plus.rolling_gate.rule.command_blist.desc": "Banned List Management",
 
-  "survival_plus_plus.rolling_gate.rule.command_sop": "/sop Command",
-  "survival_plus_plus.rolling_gate.rule.command_sop.desc": "Simple op get",
+  "server_plus_plus.rolling_gate.rule.command_sop": "/sop Command",
+  "server_plus_plus.rolling_gate.rule.command_sop.desc": "Simple op get",
 
-  "survival_plus_plus.rolling_gate.rule.command_transfer": "/transfer Command",
-  "survival_plus_plus.rolling_gate.rule.command_transfer.desc": "Allows players to transfer themselves using the /transfer command",
+  "server_plus_plus.rolling_gate.rule.command_transfer": "/transfer Command",
+  "server_plus_plus.rolling_gate.rule.command_transfer.desc": "Allows players to transfer themselves using the /transfer command",
 
-  "survival_plus_plus.rolling_gate.rule.fast_ping_friend": "Fast Ping Friend",
-  "survival_plus_plus.rolling_gate.rule.fast_ping_friend.desc": "Fast ping your friend",
+  "server_plus_plus.rolling_gate.rule.fast_ping_friend": "Fast Ping Friend",
+  "server_plus_plus.rolling_gate.rule.fast_ping_friend.desc": "Fast ping your friend",
 
   "server_plus_plus.rolling_gate.rule.welcome_player": "Welcome Player",
   "server_plus_plus.rolling_gate.rule.welcome_player.desc": "Send welcome message when player login to server",
