@@ -3,10 +3,12 @@ package dev.anvilcraft.rg.server;
 import dev.anvilcraft.rg.RollingGateCategories;
 import dev.anvilcraft.rg.api.RGValidator;
 import dev.anvilcraft.rg.api.Rule;
+import dev.anvilcraft.rg.api.server.RGServerRules;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
+@RGServerRules(value = "server_plus_plus", languages = {"zh_cn", "en_us"})
 public class ServerPlusPlusServerRules {
     public static class ViewDistanceValidator extends RGValidator.IntegerValidator {
         @Override

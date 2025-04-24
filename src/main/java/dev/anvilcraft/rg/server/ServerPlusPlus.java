@@ -16,12 +16,11 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
 @Mod(ServerPlusPlus.MOD_ID)
-public class ServerPlusPlus implements RGAdditional {
+public class ServerPlusPlus {
     public static final String MOD_ID = "server_plus_plus";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public ServerPlusPlus(@SuppressWarnings("unused") IEventBus modEventBus, @NotNull ModContainer modContainer) {
-        modContainer.registerExtensionPoint(RGAdditional.class, this);
+    public ServerPlusPlus(@NotNull @SuppressWarnings("unused") IEventBus modEventBus, @NotNull @SuppressWarnings("unused") ModContainer modContainer) {
         NeoForge.EVENT_BUS.addListener(this::onPlayerLoggingIn);
     }
 
@@ -30,12 +29,5 @@ public class ServerPlusPlus implements RGAdditional {
         if (ServerPlusPlusServerRules.welcomePlayer) {
             WelcomeMessage.onPlayerLoggedIn((ServerPlayer) event.getEntity());
         }
-    }
-
-    @Override
-    public void loadServerRules(@NotNull ServerRGRuleManager manager) {
-        manager.register(ServerPlusPlusServerRules.class);
-        TranslationUtil.loadLanguage(ServerPlusPlus.class, ServerPlusPlus.MOD_ID, "en_us");
-        TranslationUtil.loadLanguage(ServerPlusPlus.class, ServerPlusPlus.MOD_ID, "zh_cn");
     }
 }
