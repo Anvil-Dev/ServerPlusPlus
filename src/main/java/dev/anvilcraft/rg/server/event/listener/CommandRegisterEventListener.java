@@ -1,7 +1,7 @@
 package dev.anvilcraft.rg.server.event.listener;
 
 import com.mojang.brigadier.CommandDispatcher;
-import dev.anvilcraft.rg.RollingGate;
+import dev.anvilcraft.rg.server.ServerPlusPlus;
 import dev.anvilcraft.rg.server.commands.BlistCommand;
 import dev.anvilcraft.rg.server.commands.HereCommand;
 import dev.anvilcraft.rg.server.commands.LocCommand;
@@ -15,7 +15,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import org.jetbrains.annotations.NotNull;
 
-@EventBusSubscriber(modid = RollingGate.MODID)
+@EventBusSubscriber(modid = ServerPlusPlus.MOD_ID)
 public class CommandRegisterEventListener {
     @SubscribeEvent
     public static void register(@NotNull RegisterCommandsEvent event) {

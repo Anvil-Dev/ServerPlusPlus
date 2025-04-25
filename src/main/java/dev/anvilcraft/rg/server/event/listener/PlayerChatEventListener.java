@@ -1,7 +1,7 @@
 package dev.anvilcraft.rg.server.event.listener;
 
-import dev.anvilcraft.rg.RollingGate;
 import dev.anvilcraft.rg.api.event.ServerPlayerChatEvent;
+import dev.anvilcraft.rg.server.ServerPlusPlus;
 import dev.anvilcraft.rg.server.ServerPlusPlusServerRules;
 import dev.anvilcraft.rg.server.utils.FastPingFriend;
 import dev.anvilcraft.rg.tools.TriConsumer;
@@ -12,7 +12,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import org.jetbrains.annotations.NotNull;
 
-@EventBusSubscriber(modid = RollingGate.MODID)
+@EventBusSubscriber(modid = ServerPlusPlus.MOD_ID)
 public class PlayerChatEventListener {
     @SubscribeEvent
     public static void onPlayerChat(@NotNull ServerPlayerChatEvent event) {

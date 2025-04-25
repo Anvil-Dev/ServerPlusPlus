@@ -1,15 +1,15 @@
 package dev.anvilcraft.rg.server.event.listener;
 
-import dev.anvilcraft.rg.RollingGate;
 import dev.anvilcraft.rg.api.RGRule;
 import dev.anvilcraft.rg.api.event.RGRuleChangeEvent;
 import dev.anvilcraft.rg.mixin.DedicatedServerAccessor;
+import dev.anvilcraft.rg.server.ServerPlusPlus;
 import net.minecraft.server.MinecraftServer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import org.jetbrains.annotations.NotNull;
 
-@EventBusSubscriber(modid = RollingGate.MODID)
+@EventBusSubscriber(modid = ServerPlusPlus.MOD_ID)
 public class RGRuleChangeEventListener {
     @SubscribeEvent
     public static void onRuleChange(@NotNull RGRuleChangeEvent.Server<Integer> event) {
