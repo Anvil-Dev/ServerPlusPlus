@@ -158,14 +158,14 @@ public class TodoCommand {
             Component.literal("<<<").withStyle(
                 Style.EMPTY
                     .applyFormat(ChatFormatting.GREEN)
-                    .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/todo list " + (page - 1)))
+                    .withClickEvent(new ClickEvent.RunCommand("/todo list " + (page - 1)))
             );
         Component nextPage = page >= maxPage ?
             Component.literal(">>>").withStyle(ChatFormatting.GRAY) :
             Component.literal(">>>").withStyle(
                 Style.EMPTY
                     .applyFormat(ChatFormatting.GREEN)
-                    .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/todo list " + (page + 1)))
+                    .withClickEvent(new ClickEvent.RunCommand("/todo list " + (page + 1)))
             );
         context.getSource().sendSystemMessage(
             Component.literal("=======")
@@ -187,25 +187,25 @@ public class TodoCommand {
             Style.EMPTY
                 .withStrikethrough(todo.success)
                 .applyFormat(ChatFormatting.GRAY)
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal(Long.toString(todo.id))))
+                .withHoverEvent(new HoverEvent.ShowText(Component.literal(Long.toString(todo.id))))
         );
         MutableComponent success = Component.literal("[✔]").withStyle(
             Style.EMPTY
                 .applyFormat(ChatFormatting.GREEN)
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TranslationUtil.trans("command_todo.message.make_done")))
-                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/todo success %s".formatted(todo.id)))
+                .withHoverEvent(new HoverEvent.ShowText(TranslationUtil.trans("command_todo.message.make_done")))
+                .withClickEvent(new ClickEvent.RunCommand("/todo success %s".formatted(todo.id)))
         );
         MutableComponent unSuccess = Component.literal("[❌]").withStyle(
             Style.EMPTY
                 .applyFormat(ChatFormatting.RED)
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TranslationUtil.trans("command_todo.message.make_undone")))
-                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/todo success %s false".formatted(todo.id)))
+                .withHoverEvent(new HoverEvent.ShowText(TranslationUtil.trans("command_todo.message.make_undone")))
+                .withClickEvent(new ClickEvent.RunCommand("/todo success %s false".formatted(todo.id)))
         );
         MutableComponent remove = Component.literal("[\uD83D\uDDD1]").withStyle(
             Style.EMPTY
                 .applyFormat(ChatFormatting.RED)
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TranslationUtil.trans("command_todo.message.remove")))
-                .withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/todo remove %s".formatted(todo.id)))
+                .withHoverEvent(new HoverEvent.ShowText(TranslationUtil.trans("command_todo.message.remove")))
+                .withClickEvent(new ClickEvent.SuggestCommand("/todo remove %s".formatted(todo.id)))
         );
         return Component.literal(todo.success ? "☑" : "☐")
             .append(" ").append(component)

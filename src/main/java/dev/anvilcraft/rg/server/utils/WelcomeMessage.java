@@ -9,6 +9,7 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import dev.anvilcraft.rg.RollingGate;
+import dev.anvilcraft.rg.server.ServerPlusPlus;
 import dev.anvilcraft.rg.tools.FilesUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.ClickEvent;
@@ -137,9 +138,9 @@ public class WelcomeMessage {
     }
 
     public enum MessageDataType implements WelcomeMessageFunction {
-        NONE(RollingGate.id("none"), (s, p, d) -> Component.literal("")),
-        PLAYER(RollingGate.id("player"), (s, p, d) -> Component.literal(p.getGameProfile().getName())),
-        DAYCOUNT(RollingGate.id("day_count"), (s, p, d) -> {
+        NONE(ServerPlusPlus.id("none"), (s, p, d) -> Component.literal("")),
+        PLAYER(ServerPlusPlus.id("player"), (s, p, d) -> Component.literal(p.getGameProfile().getName())),
+        DAYCOUNT(ServerPlusPlus.id("day_count"), (s, p, d) -> {
             MutableComponent component = Component.literal(String.valueOf((s.overworld().getDayTime() / 1728000)));
             if (d == null || d.isJsonNull() || (!d.isJsonPrimitive() && !d.isJsonObject()) || (d.isJsonObject() && d.getAsJsonObject().asMap().isEmpty())) {
                 return component;
@@ -159,7 +160,7 @@ public class WelcomeMessage {
                 return Component.literal(String.valueOf((now.getTimeInMillis() - date.getTimeInMillis()) / 86400000 + 1));
             } else return component;
         }),
-        RANDOM(RollingGate.id("random"), (s, p, d) -> {
+        RANDOM(ServerPlusPlus.id("random"), (s, p, d) -> {
             List<String> args = new ArrayList<>();
             if (d != null && d.isJsonArray()) {
                 for (JsonElement element : d.getAsJsonArray()) {
@@ -169,7 +170,7 @@ public class WelcomeMessage {
             }
             return Component.literal(args.get(new Random().nextInt(args.size())));
         }),
-        SERVER(RollingGate.id("server"), (s, p, d) -> {
+        SERVER(ServerPlusPlus.id("server"), (s, p, d) -> {
             MutableComponent component = Component.literal("").withStyle(ChatFormatting.WHITE);
             if (d == null || !d.isJsonArray()) return component;
             int i = 0;
@@ -188,12 +189,12 @@ public class WelcomeMessage {
                 MutableComponent component1 = Component.literal(name);
                 Style style = Style.EMPTY.applyFormat(ChatFormatting.GREEN)
                     .withHoverEvent(
-                        new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal(host))
+                        new HoverEvent.ShowText(Component.literal(host))
                     );
                 style = style.withClickEvent(
                     host.contains(":") ?
-                        new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/transfer %s %s".formatted(host.split(":")[0], host.split(":")[1])) :
-                        new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/transfer %s".formatted(host))
+                        new ClickEvent.RunCommand("/transfer %s %s".formatted(host.split(":")[0], host.split(":")[1])) :
+                        new ClickEvent.RunCommand("/transfer %s".formatted(host))
                 );
                 component1.setStyle(style);
                 component.append(component1);

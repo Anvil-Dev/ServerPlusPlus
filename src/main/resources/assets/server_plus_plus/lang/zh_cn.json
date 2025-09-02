@@ -33,6 +33,7 @@
 
   "server_plus_plus.rolling_gate.rule.fast_ping_friend": "快速 Ping 好友",
   "server_plus_plus.rolling_gate.rule.fast_ping_friend.desc": "快速 Ping 好友",
+  "server_plus_plus.rolling_gate.rule.fast_ping_friend.msg": "%s 戳了你一下",
 
   "server_plus_plus.rolling_gate.rule.welcome_player": "欢迎玩家",
   "server_plus_plus.rolling_gate.rule.welcome_player.desc": "当玩家登录到服务器时发送欢迎信息",

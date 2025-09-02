@@ -1,10 +1,8 @@
 package dev.anvilcraft.rg.server;
 
 import com.mojang.logging.LogUtils;
-import dev.anvilcraft.rg.api.RGAdditional;
-import dev.anvilcraft.rg.api.server.ServerRGRuleManager;
-import dev.anvilcraft.rg.api.server.TranslationUtil;
 import dev.anvilcraft.rg.server.utils.WelcomeMessage;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -29,5 +27,9 @@ public class ServerPlusPlus {
         if (ServerPlusPlusServerRules.welcomePlayer) {
             WelcomeMessage.onPlayerLoggedIn((ServerPlayer) event.getEntity());
         }
+    }
+
+    public static @NotNull ResourceLocation id(String path) {
+        return ResourceLocation.fromNamespaceAndPath(ServerPlusPlus.MOD_ID, path);
     }
 }

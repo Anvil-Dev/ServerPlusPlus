@@ -33,6 +33,7 @@
 
   "server_plus_plus.rolling_gate.rule.fast_ping_friend": "Fast Ping Friend",
   "server_plus_plus.rolling_gate.rule.fast_ping_friend.desc": "Fast ping your friend",
+  "server_plus_plus.rolling_gate.rule.fast_ping_friend.msg": "%s ping you!",
 
   "server_plus_plus.rolling_gate.rule.welcome_player": "Welcome Player",
   "server_plus_plus.rolling_gate.rule.welcome_player.desc": "Send welcome message when player login to server",

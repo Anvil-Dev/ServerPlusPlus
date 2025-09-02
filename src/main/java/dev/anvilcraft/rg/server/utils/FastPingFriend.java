@@ -36,7 +36,7 @@ public class FastPingFriend {
 
     public static @NotNull Component getMessage(@NotNull ServerPlayer player) {
         MutableComponent playerName = Component.empty().append(player.getDisplayName()).withStyle(ChatFormatting.GOLD);
-        return TranslationUtil.trans("carpet.rule.fastPingFriend.msg", playerName).withStyle(ChatFormatting.AQUA);
+        return TranslationUtil.trans("server_plus_plus.rolling_gate.rule.fast_ping_friend.msg", playerName).withStyle(ChatFormatting.AQUA);
     }
 
     public static void playSound(SoundEvent event, @NotNull ServerPlayer player) {

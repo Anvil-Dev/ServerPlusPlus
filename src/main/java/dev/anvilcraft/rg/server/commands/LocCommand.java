@@ -136,14 +136,14 @@ public class LocCommand {
             Component.literal("<<<").withStyle(
                 Style.EMPTY
                     .applyFormat(ChatFormatting.GREEN)
-                    .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/loc list " + (page - 1)))
+                    .withClickEvent(new ClickEvent.RunCommand("/loc list " + (page - 1)))
             );
         Component nextPage = page >= maxPage ?
             Component.literal(">>>").withStyle(ChatFormatting.GRAY) :
             Component.literal(">>>").withStyle(
                 Style.EMPTY
                     .applyFormat(ChatFormatting.GREEN)
-                    .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/loc list " + (page + 1)))
+                    .withClickEvent(new ClickEvent.RunCommand("/loc list " + (page + 1)))
             );
         context.getSource().sendSystemMessage(
             Component.literal("=======")
@@ -164,20 +164,20 @@ public class LocCommand {
         MutableComponent component = Component.literal(locPoint.desc).withStyle(
             Style.EMPTY
                 .applyFormat(ChatFormatting.GRAY)
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal(Long.toString(locPoint.id))))
+                .withHoverEvent(new HoverEvent.ShowText(Component.literal(Long.toString(locPoint.id))))
         );
         List<MutableComponent> pos = PosUtils.pos(locPoint.desc, locPoint.x, locPoint.y, locPoint.z, locPoint.dimType);
         MutableComponent info = Component.literal("[i]").withStyle(
             Style.EMPTY
                 .applyFormat(ChatFormatting.YELLOW)
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TranslationUtil.trans("command_loc.message.info")))
-                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/loc info %s".formatted(locPoint.id)))
+                .withHoverEvent(new HoverEvent.ShowText(TranslationUtil.trans("command_loc.message.info")))
+                .withClickEvent(new ClickEvent.RunCommand("/loc info %s".formatted(locPoint.id)))
         );
         MutableComponent remove = Component.literal("[\uD83D\uDDD1]").withStyle(
             Style.EMPTY
                 .applyFormat(ChatFormatting.RED)
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TranslationUtil.trans("command_loc.message.remove")))
-                .withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/loc remove %s".formatted(locPoint.id)))
+                .withHoverEvent(new HoverEvent.ShowText(TranslationUtil.trans("command_loc.message.remove")))
+                .withClickEvent(new ClickEvent.SuggestCommand("/loc remove %s".formatted(locPoint.id)))
         );
         return Component.literal("▶ ").append(component)
             .append(" ").append(pos.getFirst())
