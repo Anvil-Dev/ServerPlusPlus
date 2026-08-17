@@ -17,7 +17,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import org.apache.commons.lang3.time.DateUtils;
@@ -85,7 +85,7 @@ public class WelcomeMessage {
     }
 
     public static class MessageData {
-        public ResourceLocation type = MessageDataType.PLAYER.location;
+        public Identifier type = MessageDataType.PLAYER.location;
         public JsonElement data = null;
         public ChatFormatting color = ChatFormatting.GOLD;
 
@@ -102,12 +102,12 @@ public class WelcomeMessage {
             public MessageData deserialize(@NotNull JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
                 MessageData data = new MessageData();
                 if (json.isJsonPrimitive()) {
-                    data.type = MessageDataType.get(ResourceLocation.parse(json.getAsString())).location;
+                    data.type = MessageDataType.get(Identifier.parse(json.getAsString())).location;
                     return data;
                 }
                 JsonObject object = json.getAsJsonObject();
                 if (object.has("type")) {
-                    data.type = MessageDataType.get(ResourceLocation.parse(object.get("type").getAsString())).location;
+                    data.type = MessageDataType.get(Identifier.parse(object.get("type").getAsString())).location;
                 }
                 if (object.has("data")) {
                     data.data = object.get("data");
@@ -141,7 +141,7 @@ public class WelcomeMessage {
         NONE(ServerPlusPlus.id("none"), (s, p, d) -> Component.literal("")),
         PLAYER(ServerPlusPlus.id("player"), (s, p, d) -> Component.literal(p.getGameProfile().name())),
         DAYCOUNT(ServerPlusPlus.id("day_count"), (s, p, d) -> {
-            MutableComponent component = Component.literal(String.valueOf((s.overworld().getDayTime() / 1728000)));
+            MutableComponent component = Component.literal(String.valueOf((s.overworld().getOverworldClockTime() / 1728000)));
             if (d == null || d.isJsonNull() || (!d.isJsonPrimitive() && !d.isJsonObject()) || (d.isJsonObject() && d.getAsJsonObject().asMap().isEmpty())) {
                 return component;
             }
@@ -204,10 +204,10 @@ public class WelcomeMessage {
             return Component.literal("").append(component);
         });
 
-        public final ResourceLocation location;
+        public final Identifier location;
         private final WelcomeMessageFunction function;
 
-        MessageDataType(ResourceLocation location, WelcomeMessageFunction function) {
+        MessageDataType(Identifier location, WelcomeMessageFunction function) {
             this.location = location;
             this.function = function;
         }
@@ -217,7 +217,7 @@ public class WelcomeMessage {
             return this.location.toString();
         }
 
-        public static MessageDataType get(ResourceLocation location) {
+        public static MessageDataType get(Identifier location) {
             for (MessageDataType value : values()) {
                 if (value.location.equals(location)) return value;
             }

@@ -70,9 +70,9 @@ jobs:
         continue-on-error: true
 
       - name: gametest
-        uses: Anvil-Dev/dedicated-server-launch-test@1.21.10-neoforge
+        uses: Anvil-Dev/dedicated-server-launch-test@26.1.2-neoforge
         with:
-          mod: build/libs/${{ steps.properties.outputs.mod_id }}-neoforge-${{ steps.properties.outputs.minecraft_version }}-${{ steps.version.outputs.version }}.jar
+          mods: build/libs/${{ steps.properties.outputs.mod_id }}-neoforge-${{ steps.properties.outputs.minecraft_version }}-${{ steps.version.outputs.version }}.jar
           extra-mods: rolling-gate:${{ steps.properties.outputs.rolling_gate_version }}
 
       - name: publish neoforge mc mod
@@ -83,7 +83,7 @@ jobs:
           version: ${{ steps.version.outputs.version }}
           game-versions: ${{ steps.properties.outputs.minecraft_version }}
           version-type: "alpha"
-          java: 21
+          java: ${{ steps.properties.outputs.java_version }}
           fail-mode: skip
           changelog: ${{ github.event.head_commit.message }}
           dependencies: |

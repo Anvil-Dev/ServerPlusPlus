@@ -35,7 +35,7 @@ public class WlistCommand {
                 .executes(WlistCommand::list)
                 .then(
                     Commands.literal("permission")
-                        .requires(stack -> stack.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                        .requires(stack -> Commands.hasPermission(Commands.LEVEL_GAMEMASTERS).test(stack))
                         .then(
                             Commands.literal("add")
                                 .then(
@@ -127,7 +127,7 @@ public class WlistCommand {
     }
 
     public static boolean hasPermission(FilesUtil.MapFile<String, Boolean> permission, @NotNull CommandSourceStack stack) {
-        if (stack.hasPermission(Commands.LEVEL_GAMEMASTERS)) return true;
+        if (Commands.hasPermission(Commands.LEVEL_GAMEMASTERS).test(stack)) return true;
         if (stack.isPlayer()) {
             ServerPlayer player = stack.getPlayer();
             if (player == null) return false;

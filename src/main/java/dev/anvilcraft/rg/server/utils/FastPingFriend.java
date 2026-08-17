@@ -42,6 +42,6 @@ public class FastPingFriend {
     public static void playSound(SoundEvent event, @NotNull ServerPlayer player) {
         Holder<SoundEvent> holder = Holder.direct(event);
         Vec3 pos = player.getEyePosition();
-        player.connection.send(new ClientboundSoundPacket(holder, SoundSource.MASTER, pos.x(), pos.y(), pos.z(), 1.0f, 1.0f, player.level().random.nextLong()));
+        player.connection.send(new ClientboundSoundPacket(holder, SoundSource.MASTER, pos.x(), pos.y(), pos.z(), 1.0f, 1.0f, player.getRandom().nextLong()));
     }
 }

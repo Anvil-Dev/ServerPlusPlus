@@ -35,7 +35,7 @@ public class BlistCommand {
                 .executes(BlistCommand::list)
                 .then(
                     Commands.literal("permission")
-                        .requires(stack -> stack.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                        .requires(stack -> Commands.hasPermission(Commands.LEVEL_GAMEMASTERS).test(stack))
                         .then(
                             Commands.literal("add")
                                 .then(
