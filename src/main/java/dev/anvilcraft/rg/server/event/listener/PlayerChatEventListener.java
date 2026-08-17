@@ -45,7 +45,8 @@ public class PlayerChatEventListener {
         String string = component.getString();
         if (!string.startsWith(prefix)) return;
         string = string.substring(prefix.length());
-        MinecraftServer server = player.getServer();
+        MinecraftServer server = player.level().getServer();
+        if (server == null) return;
         handle.accept(server, player, string);
     }
 }

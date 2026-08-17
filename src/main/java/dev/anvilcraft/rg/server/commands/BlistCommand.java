@@ -1,6 +1,6 @@
 package dev.anvilcraft.rg.server.commands;
 
-import com.mojang.authlib.GameProfile;
+import net.minecraft.server.players.NameAndId;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -82,13 +82,13 @@ public class BlistCommand {
             component = Component.literal(StringArgumentType.getString(context, "reson"));
         } catch (IllegalArgumentException ignored) {
         }
-        for (GameProfile gameProfile : GameProfileArgument.getGameProfiles(context, "targets")) {
+        for (NameAndId gameProfile : GameProfileArgument.getGameProfiles(context, "targets")) {
             if (!userBanList.isBanned(gameProfile)) {
                 UserBanListEntry userBanListEntry = new UserBanListEntry(gameProfile, null, source.getTextName(), null, component == null ? null : component.getString());
                 userBanList.add(userBanListEntry);
                 ++i;
-                source.sendSuccess(() -> Component.translatable("commands.ban.success", Component.literal(gameProfile.getName()), userBanListEntry.getReason()), true);
-                ServerPlayer serverPlayer = source.getServer().getPlayerList().getPlayer(gameProfile.getId());
+                source.sendSuccess(() -> Component.translatable("commands.ban.success", Component.literal(gameProfile.name()), userBanListEntry.getReason()), true);
+                ServerPlayer serverPlayer = source.getServer().getPlayerList().getPlayer(gameProfile.id());
                 if (serverPlayer != null) {
                     serverPlayer.connection.disconnect(Component.translatable("multiplayer.disconnect.banned"));
                 }
@@ -106,11 +106,11 @@ public class BlistCommand {
         CommandSourceStack source = context.getSource();
         UserBanList userBanList = source.getServer().getPlayerList().getBans();
         int i = 0;
-        for (GameProfile gameProfile : GameProfileArgument.getGameProfiles(context, "targets")) {
+        for (NameAndId gameProfile : GameProfileArgument.getGameProfiles(context, "targets")) {
             if (userBanList.isBanned(gameProfile)) {
                 userBanList.remove(gameProfile);
                 ++i;
-                source.sendSuccess(() -> Component.translatable("commands.pardon.success", Component.literal(gameProfile.getName())), true);
+                source.sendSuccess(() -> Component.translatable("commands.pardon.success", Component.literal(gameProfile.name())), true);
             }
         }
         if (i == 0) {
@@ -138,10 +138,10 @@ public class BlistCommand {
     private static int permissionAdd(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         PERMISSION.init(context);
         int i = 0;
-        Collection<GameProfile> targets = GameProfileArgument.getGameProfiles(context, "targets");
-        for (GameProfile target : targets) {
-            PERMISSION.map.put(target.getId().toString(), true);
-            context.getSource().sendSuccess(() -> TranslationUtil.trans("command_blist.message.granted_permission", target.getName()), true);
+        Collection<NameAndId> targets = GameProfileArgument.getGameProfiles(context, "targets");
+        for (NameAndId target : targets) {
+            PERMISSION.map.put(target.id().toString(), true);
+            context.getSource().sendSuccess(() -> TranslationUtil.trans("command_blist.message.granted_permission", target.name()), true);
             ++i;
         }
         ModCommands.notifyPlayersCommandsChanged(context.getSource().getServer());
@@ -152,10 +152,10 @@ public class BlistCommand {
     private static int permissionRemove(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         PERMISSION.init(context);
         int i = 0;
-        Collection<GameProfile> targets = GameProfileArgument.getGameProfiles(context, "targets");
-        for (GameProfile target : targets) {
-            PERMISSION.map.put(target.getId().toString(), false);
-            context.getSource().sendSuccess(() -> TranslationUtil.trans("command_blist.message.revoked_permission", target.getName()), true);
+        Collection<NameAndId> targets = GameProfileArgument.getGameProfiles(context, "targets");
+        for (NameAndId target : targets) {
+            PERMISSION.map.put(target.id().toString(), false);
+            context.getSource().sendSuccess(() -> TranslationUtil.trans("command_blist.message.revoked_permission", target.name()), true);
             ++i;
         }
         ModCommands.notifyPlayersCommandsChanged(context.getSource().getServer());

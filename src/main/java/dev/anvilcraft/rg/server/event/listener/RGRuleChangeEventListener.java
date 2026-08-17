@@ -23,13 +23,13 @@ public class RGRuleChangeEventListener {
 
     public static void changeViewDistance(@NotNull MinecraftServer server, int value) {
         if (!server.isDedicatedServer()) return;
-        int distance = value >= 2 ? value : ((DedicatedServerAccessor) server).getSettings().getProperties().viewDistance;
+        int distance = value >= 2 ? value : ((DedicatedServerAccessor) server).getSettings().getProperties().viewDistance.get();
         server.getPlayerList().setViewDistance(distance);
     }
 
     public static void changeSimulationDistance(@NotNull MinecraftServer server, int value) {
         if (!server.isDedicatedServer()) return;
-        int distance = value >= 2 ? value : ((DedicatedServerAccessor) server).getSettings().getProperties().simulationDistance;
+        int distance = value >= 2 ? value : ((DedicatedServerAccessor) server).getSettings().getProperties().simulationDistance.get();
         server.getPlayerList().setSimulationDistance(distance);
     }
 }

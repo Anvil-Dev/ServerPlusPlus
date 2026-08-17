@@ -1,6 +1,6 @@
 package dev.anvilcraft.rg.server.commands;
 
-import com.mojang.authlib.GameProfile;
+import net.minecraft.server.players.NameAndId;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -60,8 +60,8 @@ public class WlistCommand {
                                     return SharedSuggestionProvider.suggest(
                                         playerList.getPlayers()
                                             .stream()
-                                            .filter((serverPlayer) -> !playerList.getWhiteList().isWhiteListed(serverPlayer.getGameProfile()))
-                                            .map((serverPlayer) -> serverPlayer.getGameProfile().getName()),
+                                            .filter((serverPlayer) -> !playerList.getWhiteList().isWhiteListed(new NameAndId(serverPlayer.getGameProfile())))
+                                            .map((serverPlayer) -> new NameAndId(serverPlayer.getGameProfile()).name()),
                                         suggestionsBuilder
                                     );
                                 })
@@ -83,12 +83,12 @@ public class WlistCommand {
         CommandSourceStack source = context.getSource();
         UserWhiteList userWhiteList = source.getServer().getPlayerList().getWhiteList();
         int i = 0;
-        for (GameProfile gameProfile : GameProfileArgument.getGameProfiles(context, "targets")) {
+        for (NameAndId gameProfile : GameProfileArgument.getGameProfiles(context, "targets")) {
             if (!userWhiteList.isWhiteListed(gameProfile)) {
                 UserWhiteListEntry userWhiteListEntry = new UserWhiteListEntry(gameProfile);
                 userWhiteList.add(userWhiteListEntry);
                 i++;
-                source.sendSuccess(() -> Component.translatable("commands.whitelist.add.success", Component.literal(gameProfile.getName())), true);
+                source.sendSuccess(() -> Component.translatable("commands.whitelist.add.success", Component.literal(gameProfile.name())), true);
             }
         }
         if (i == 0) throw ERROR_ALREADY_WHITELISTED.create();
@@ -99,18 +99,18 @@ public class WlistCommand {
         CommandSourceStack source = context.getSource();
         UserWhiteList userWhiteList = source.getServer().getPlayerList().getWhiteList();
         int i = 0;
-        for (GameProfile gameProfile : GameProfileArgument.getGameProfiles(context, "targets")) {
+        for (NameAndId gameProfile : GameProfileArgument.getGameProfiles(context, "targets")) {
             if (userWhiteList.isWhiteListed(gameProfile)) {
                 UserWhiteListEntry userWhiteListEntry = new UserWhiteListEntry(gameProfile);
                 userWhiteList.remove(userWhiteListEntry);
                 i++;
-                source.sendSuccess(() -> Component.translatable("commands.whitelist.remove.success", Component.literal(gameProfile.getName())), true);
+                source.sendSuccess(() -> Component.translatable("commands.whitelist.remove.success", Component.literal(gameProfile.name())), true);
             }
         }
         if (i == 0) {
             throw ERROR_NOT_WHITELISTED.create();
         } else {
-            source.getServer().kickUnlistedPlayers(source);
+            source.getServer().kickUnlistedPlayers();
             return i;
         }
     }
@@ -131,17 +131,17 @@ public class WlistCommand {
         if (stack.isPlayer()) {
             ServerPlayer player = stack.getPlayer();
             if (player == null) return false;
-            return permission.map.getOrDefault(player.getGameProfile().getId().toString(), false);
+            return permission.map.getOrDefault(new NameAndId(player.getGameProfile()).id().toString(), false);
         } else return true;
     }
 
     private static int permissionAdd(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         PERMISSION.init(context);
         int i = 0;
-        Collection<GameProfile> targets = GameProfileArgument.getGameProfiles(context, "targets");
-        for (GameProfile target : targets) {
-            PERMISSION.map.put(target.getId().toString(), true);
-            context.getSource().sendSuccess(() -> TranslationUtil.trans("command_wlist.message.granted_permission", target.getName()), true);
+        Collection<NameAndId> targets = GameProfileArgument.getGameProfiles(context, "targets");
+        for (NameAndId target : targets) {
+            PERMISSION.map.put(target.id().toString(), true);
+            context.getSource().sendSuccess(() -> TranslationUtil.trans("command_wlist.message.granted_permission", target.name()), true);
             ++i;
         }
         ModCommands.notifyPlayersCommandsChanged(context.getSource().getServer());
@@ -152,10 +152,10 @@ public class WlistCommand {
     private static int permissionRemove(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         PERMISSION.init(context);
         int i = 0;
-        Collection<GameProfile> targets = GameProfileArgument.getGameProfiles(context, "targets");
-        for (GameProfile target : targets) {
-            PERMISSION.map.put(target.getId().toString(), false);
-            context.getSource().sendSuccess(() -> TranslationUtil.trans("command_wlist.message.revoked_permission", target.getName()), true);
+        Collection<NameAndId> targets = GameProfileArgument.getGameProfiles(context, "targets");
+        for (NameAndId target : targets) {
+            PERMISSION.map.put(target.id().toString(), false);
+            context.getSource().sendSuccess(() -> TranslationUtil.trans("command_wlist.message.revoked_permission", target.name()), true);
             ++i;
         }
         ModCommands.notifyPlayersCommandsChanged(context.getSource().getServer());

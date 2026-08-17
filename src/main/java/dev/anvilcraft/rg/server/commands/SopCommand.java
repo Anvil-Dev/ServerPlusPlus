@@ -1,6 +1,6 @@
 package dev.anvilcraft.rg.server.commands;
 
-import com.mojang.authlib.GameProfile;
+import net.minecraft.server.players.NameAndId;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import dev.anvilcraft.rg.api.RGValidator;
@@ -27,10 +27,10 @@ public class SopCommand {
         PlayerList playerList = source.getServer().getPlayerList();
         ServerPlayer player = source.getPlayer();
         if (player == null) return 0;
-        GameProfile gameProfile = player.getGameProfile();
+        NameAndId gameProfile = new NameAndId(player.getGameProfile());
         if (!playerList.isOp(gameProfile)) {
             playerList.op(gameProfile);
-            source.sendSuccess(() -> Component.translatable("commands.op.success", gameProfile.getName()), true);
+            source.sendSuccess(() -> Component.translatable("commands.op.success", gameProfile.name()), true);
         }
         return 1;
     }

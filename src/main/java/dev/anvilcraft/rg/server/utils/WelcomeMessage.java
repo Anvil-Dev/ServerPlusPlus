@@ -48,7 +48,7 @@ public class WelcomeMessage {
     }
 
     public static void onPlayerLoggedIn(@NotNull ServerPlayer player) {
-        MinecraftServer server = player.getServer();
+        MinecraftServer server = player.level().getServer();
         if (server == null) return;
         WELCOME_MESSAGE.init(server);
         MessageConfig config = WELCOME_MESSAGE.obj;
@@ -139,7 +139,7 @@ public class WelcomeMessage {
 
     public enum MessageDataType implements WelcomeMessageFunction {
         NONE(ServerPlusPlus.id("none"), (s, p, d) -> Component.literal("")),
-        PLAYER(ServerPlusPlus.id("player"), (s, p, d) -> Component.literal(p.getGameProfile().getName())),
+        PLAYER(ServerPlusPlus.id("player"), (s, p, d) -> Component.literal(p.getGameProfile().name())),
         DAYCOUNT(ServerPlusPlus.id("day_count"), (s, p, d) -> {
             MutableComponent component = Component.literal(String.valueOf((s.overworld().getDayTime() / 1728000)));
             if (d == null || d.isJsonNull() || (!d.isJsonPrimitive() && !d.isJsonObject()) || (d.isJsonObject() && d.getAsJsonObject().asMap().isEmpty())) {
