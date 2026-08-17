@@ -113,7 +113,7 @@ public class WelcomeMessage {
                     data.data = object.get("data");
                 }
                 if (object.has("color")) {
-                    data.color = ChatFormatting.getByName(object.get("color").getAsString());
+                    data.color = ChatFormatting.valueOf(object.get("color").getAsString().toUpperCase(Locale.ROOT));
                 }
                 return data;
             }
