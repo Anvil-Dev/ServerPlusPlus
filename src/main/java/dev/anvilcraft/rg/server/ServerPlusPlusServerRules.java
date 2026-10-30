@@ -4,7 +4,6 @@ import dev.anvilcraft.rg.RollingGateCategories;
 import dev.anvilcraft.rg.api.RGValidator;
 import dev.anvilcraft.rg.api.Rule;
 import dev.anvilcraft.rg.api.server.RGServerRules;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -12,7 +11,7 @@ import java.util.Map;
 public class ServerPlusPlusServerRules {
     public static class ViewDistanceValidator extends RGValidator.IntegerValidator {
         @Override
-        public @NotNull Map.Entry<Integer, Integer> getRange() {
+        public Map.Entry<Integer, Integer> getRange() {
             return Map.entry(0, 32);
         }
     }

@@ -27,7 +27,6 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ import java.util.concurrent.CompletableFuture;
 public class LocCommand {
     public static final FilesUtil.MapFile<Long, LocPoint> LOC_POINT = new FilesUtil.MapFile<>("loc", Long::decode, LocPoint.class);
 
-    public static void register(@NotNull CommandDispatcher<CommandSourceStack> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             ModCommands.root(dispatcher, "loc")
                 .requires(stack -> RGValidator.CommandRuleValidator.hasPermission(() -> ServerPlusPlusServerRules.commandLoc, stack))
@@ -75,7 +74,7 @@ public class LocCommand {
         );
     }
 
-    private static @NotNull CompletableFuture<Suggestions> suggestId(
+    private static CompletableFuture<Suggestions> suggestId(
         final CommandContext<CommandSourceStack> context,
         final SuggestionsBuilder builder
     ) {
@@ -160,7 +159,7 @@ public class LocCommand {
         return 1;
     }
 
-    private static @NotNull MutableComponent locToComponent(@NotNull LocPoint locPoint) {
+    private static MutableComponent locToComponent(LocPoint locPoint) {
         MutableComponent component = Component.literal(locPoint.desc).withStyle(
             Style.EMPTY
                 .applyFormat(ChatFormatting.GRAY)
@@ -199,17 +198,17 @@ public class LocCommand {
         return 1;
     }
 
-    public static @NotNull List<Component> info(@NotNull LocPoint point) {
+    public static List<Component> info(LocPoint point) {
         MutableComponent desc = Component.literal(point.desc);
         MutableComponent dimType;
         if (point.dimType == Level.NETHER) {
-            dimType = Component.translatableWithFallback("advancements.nether.root.title", point.dimType.location().toString());
+            dimType = Component.translatableWithFallback("advancements.nether.root.title", point.dimType.identifier().toString());
         } else if (point.dimType == Level.END) {
-            dimType = Component.translatableWithFallback("advancements.end.root.title", point.dimType.location().toString());
+            dimType = Component.translatableWithFallback("advancements.end.root.title", point.dimType.identifier().toString());
         } else if (point.dimType == Level.OVERWORLD) {
-            dimType = Component.translatableWithFallback("flat_world_preset.minecraft.overworld", point.dimType.location().toString());
+            dimType = Component.translatableWithFallback("flat_world_preset.minecraft.overworld", point.dimType.identifier().toString());
         } else {
-            dimType = Component.literal(point.dimType.location().toString());
+            dimType = Component.literal(point.dimType.identifier().toString());
         }
         List<MutableComponent> pos = PosUtils.pos(point.desc, point.x, point.y, point.z, point.dimType);
         List<Component> result = new ArrayList<>();

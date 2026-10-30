@@ -13,12 +13,11 @@ import net.minecraft.commands.CommandSourceStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import org.jetbrains.annotations.NotNull;
 
 @EventBusSubscriber(modid = ServerPlusPlus.MOD_ID)
 public class CommandRegisterEventListener {
     @SubscribeEvent
-    public static void register(@NotNull RegisterCommandsEvent event) {
+    public static void register(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
         HereCommand.register(dispatcher);
         LocCommand.register(dispatcher);

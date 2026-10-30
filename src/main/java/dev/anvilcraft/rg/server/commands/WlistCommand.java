@@ -19,7 +19,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.server.players.UserWhiteList;
 import net.minecraft.server.players.UserWhiteListEntry;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -28,14 +27,14 @@ public class WlistCommand {
     private static final SimpleCommandExceptionType ERROR_ALREADY_WHITELISTED = new SimpleCommandExceptionType(Component.translatable("commands.whitelist.add.failed"));
     private static final SimpleCommandExceptionType ERROR_NOT_WHITELISTED = new SimpleCommandExceptionType(Component.translatable("commands.whitelist.remove.failed"));
 
-    public static void register(@NotNull CommandDispatcher<CommandSourceStack> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             ModCommands.root(dispatcher, "wlist")
                 .requires(stack -> RGValidator.CommandRuleValidator.hasPermission(() -> ServerPlusPlusServerRules.commandWlist, stack) && WlistCommand.hasPermission(PERMISSION, stack))
                 .executes(WlistCommand::list)
                 .then(
                     Commands.literal("permission")
-                        .requires(stack -> stack.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                        .requires(stack -> Commands.LEVEL_GAMEMASTERS.check(stack.permissions()))
                         .then(
                             Commands.literal("add")
                                 .then(
@@ -79,7 +78,7 @@ public class WlistCommand {
         );
     }
 
-    public static int add(@NotNull CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+    public static int add(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         CommandSourceStack source = context.getSource();
         UserWhiteList userWhiteList = source.getServer().getPlayerList().getWhiteList();
         int i = 0;
@@ -95,7 +94,7 @@ public class WlistCommand {
         else return i;
     }
 
-    public static int remove(@NotNull CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+    public static int remove(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         CommandSourceStack source = context.getSource();
         UserWhiteList userWhiteList = source.getServer().getPlayerList().getWhiteList();
         int i = 0;
@@ -115,7 +114,7 @@ public class WlistCommand {
         }
     }
 
-    public static int list(@NotNull CommandContext<CommandSourceStack> context) {
+    public static int list(CommandContext<CommandSourceStack> context) {
         CommandSourceStack source = context.getSource();
         String[] strings = source.getServer().getPlayerList().getWhiteListNames();
         if (strings.length == 0) {
@@ -126,8 +125,8 @@ public class WlistCommand {
         return strings.length;
     }
 
-    public static boolean hasPermission(FilesUtil.MapFile<String, Boolean> permission, @NotNull CommandSourceStack stack) {
-        if (stack.hasPermission(Commands.LEVEL_GAMEMASTERS)) return true;
+    public static boolean hasPermission(FilesUtil.MapFile<String, Boolean> permission, CommandSourceStack stack) {
+        if (Commands.LEVEL_GAMEMASTERS.check(stack.permissions())) return true;
         if (stack.isPlayer()) {
             ServerPlayer player = stack.getPlayer();
             if (player == null) return false;

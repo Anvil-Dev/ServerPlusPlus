@@ -10,12 +10,11 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import org.jetbrains.annotations.NotNull;
 
 @EventBusSubscriber(modid = ServerPlusPlus.MOD_ID)
 public class PlayerChatEventListener {
     @SubscribeEvent
-    public static void onPlayerChat(@NotNull ServerPlayerChatEvent event) {
+    public static void onPlayerChat(ServerPlayerChatEvent event) {
         ServerPlayer player = event.getEntity();
         Component component = event.getComponent();
         PlayerChatEventListener.handleChat(

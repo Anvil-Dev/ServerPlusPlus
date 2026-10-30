@@ -17,12 +17,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import org.apache.commons.lang3.time.DateUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -47,7 +46,7 @@ public class WelcomeMessage {
         );
     }
 
-    public static void onPlayerLoggedIn(@NotNull ServerPlayer player) {
+    public static void onPlayerLoggedIn(ServerPlayer player) {
         MinecraftServer server = player.level().getServer();
         if (server == null) return;
         WELCOME_MESSAGE.init(server);
@@ -85,7 +84,7 @@ public class WelcomeMessage {
     }
 
     public static class MessageData {
-        public ResourceLocation type = MessageDataType.PLAYER.location;
+        public Identifier type = MessageDataType.PLAYER.location;
         public JsonElement data = null;
         public ChatFormatting color = ChatFormatting.GOLD;
 
@@ -99,15 +98,15 @@ public class WelcomeMessage {
 
         public static class Serializer implements JsonSerializer<MessageData>, JsonDeserializer<MessageData> {
             @Override
-            public MessageData deserialize(@NotNull JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            public MessageData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
                 MessageData data = new MessageData();
                 if (json.isJsonPrimitive()) {
-                    data.type = MessageDataType.get(ResourceLocation.parse(json.getAsString())).location;
+                    data.type = MessageDataType.get(Identifier.parse(json.getAsString())).location;
                     return data;
                 }
                 JsonObject object = json.getAsJsonObject();
                 if (object.has("type")) {
-                    data.type = MessageDataType.get(ResourceLocation.parse(object.get("type").getAsString())).location;
+                    data.type = MessageDataType.get(Identifier.parse(object.get("type").getAsString())).location;
                 }
                 if (object.has("data")) {
                     data.data = object.get("data");
@@ -119,7 +118,7 @@ public class WelcomeMessage {
             }
 
             @Override
-            public JsonElement serialize(@NotNull MessageData src, Type typeOfSrc, JsonSerializationContext context) {
+            public JsonElement serialize(MessageData src, Type typeOfSrc, JsonSerializationContext context) {
                 if (src.color == ChatFormatting.GOLD && src.data == null) {
                     return new JsonPrimitive(src.type.toString());
                 }
@@ -134,7 +133,7 @@ public class WelcomeMessage {
 
     @FunctionalInterface
     public interface WelcomeMessageFunction {
-        MutableComponent getMsg(@NotNull MinecraftServer server, @NotNull ServerPlayer player, @Nullable JsonElement data) throws Exception;
+        MutableComponent getMsg(MinecraftServer server, ServerPlayer player, @Nullable JsonElement data) throws Exception;
     }
 
     public enum MessageDataType implements WelcomeMessageFunction {
@@ -204,20 +203,20 @@ public class WelcomeMessage {
             return Component.literal("").append(component);
         });
 
-        public final ResourceLocation location;
+        public final Identifier location;
         private final WelcomeMessageFunction function;
 
-        MessageDataType(ResourceLocation location, WelcomeMessageFunction function) {
+        MessageDataType(Identifier location, WelcomeMessageFunction function) {
             this.location = location;
             this.function = function;
         }
 
         @Override
-        public @NotNull String toString() {
+        public String toString() {
             return this.location.toString();
         }
 
-        public static MessageDataType get(ResourceLocation location) {
+        public static MessageDataType get(Identifier location) {
             for (MessageDataType value : values()) {
                 if (value.location.equals(location)) return value;
             }
@@ -225,7 +224,7 @@ public class WelcomeMessage {
         }
 
         @Override
-        public MutableComponent getMsg(@NotNull MinecraftServer server, @NotNull ServerPlayer player, @Nullable JsonElement data) {
+        public MutableComponent getMsg(MinecraftServer server, ServerPlayer player, @Nullable JsonElement data) {
             try {
                 return this.function.getMsg(server, player, data);
             } catch (Exception e) {

@@ -23,14 +23,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
 
 public class TodoCommand {
     public static final FilesUtil.MapFile<Long, Todo> TODO = new FilesUtil.MapFile<>("todo", Long::decode, Todo.class);
 
-    public static void register(@NotNull CommandDispatcher<CommandSourceStack> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             ModCommands.root(dispatcher, "todo")
                 .requires(stack -> RGValidator.CommandRuleValidator.hasPermission(() -> ServerPlusPlusServerRules.commandTodo, stack))
@@ -73,7 +72,7 @@ public class TodoCommand {
         );
     }
 
-    private static @NotNull CompletableFuture<Suggestions> suggestId(
+    private static CompletableFuture<Suggestions> suggestId(
         final CommandContext<CommandSourceStack> context,
         final SuggestionsBuilder builder
     ) {
@@ -182,7 +181,7 @@ public class TodoCommand {
         return 1;
     }
 
-    private static @NotNull MutableComponent TodoToComponent(@NotNull Todo todo) {
+    private static MutableComponent TodoToComponent(Todo todo) {
         MutableComponent component = Component.literal(todo.desc).withStyle(
             Style.EMPTY
                 .withStrikethrough(todo.success)
