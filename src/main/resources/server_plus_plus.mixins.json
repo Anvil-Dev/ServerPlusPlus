@@ -2,7 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "dev.anvilcraft.rg.server.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_25",
   "refmap": "server_plus_plus.refmap.json",
   "mixins": [
     "TransferCommandMixin"

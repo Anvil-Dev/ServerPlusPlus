@@ -140,7 +140,7 @@ public class WelcomeMessage {
         NONE(ServerPlusPlus.id("none"), (s, p, d) -> Component.literal("")),
         PLAYER(ServerPlusPlus.id("player"), (s, p, d) -> Component.literal(p.getGameProfile().name())),
         DAYCOUNT(ServerPlusPlus.id("day_count"), (s, p, d) -> {
-            MutableComponent component = Component.literal(String.valueOf((s.overworld().getDayTime() / 1728000)));
+            MutableComponent component = Component.literal(String.valueOf((s.overworld().getOverworldClockTime() / 1728000)));
             if (d == null || d.isJsonNull() || (!d.isJsonPrimitive() && !d.isJsonObject()) || (d.isJsonObject() && d.getAsJsonObject().asMap().isEmpty())) {
                 return component;
             }
